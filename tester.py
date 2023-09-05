@@ -12,11 +12,11 @@ class TesterPrinter(object):
 
     @staticmethod
     def stderr(msg):
-        print >> sys.stderr, msg
+        print(msg, file=sys.stderr)
 
     @staticmethod
     def stdout(msg):
-        print msg
+        print(msg)
 
     def results(self, results):
         failed_count = 0
@@ -112,7 +112,7 @@ class HomeworkTester(object):
             result = TestResult(test_case, True, "HANG!")
             return result
 
-        got = self.p.before.replace('\r', '').rstrip('\n').strip()
+        got = self.p.before.decode('utf-8').replace('\r', '').rstrip('\n').strip()
         return TestResult(test_case, False, got)
 
     def _analyze_path_result(self, expected, got):
